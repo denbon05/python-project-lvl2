@@ -6,7 +6,7 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/293b08fc7b06b529aa57/test_coverage)](https://codeclimate.com/github/denbon05/python-project-lvl2/test_coverage)
 
 
-### Description
+# About
 
 <p>App for getting difference between two files with the same and different extensions</p>
 
@@ -15,10 +15,17 @@
 pip install git+https://github.com/denbon05/python-project-lvl2.git
 </pre>
 
-### Usage
+# Usage
 
-#### As a comand line app
-[![asciicast](https://asciinema.org/a/420043.svg)](https://asciinema.org/a/420043)
+<b>Available formats [-f --format]</b>
 
-#### As a library
-[![asciicast](https://asciinema.org/a/420040.svg)](https://asciinema.org/a/420040)
+<ul>
+<li>stylish (default)</li>
+<li>plain</li>
+</ul>
+
+## As a comand line app
+[![asciicast](https://asciinema.org/a/420242.svg)](https://asciinema.org/a/420242)
+
+### As a library
+[![asciicast](https://asciinema.org/a/420241.svg)](https://asciinema.org/a/420241)

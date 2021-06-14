@@ -23,7 +23,7 @@ def get_diff_ast(node1: dict, node2: dict):  # noqa: C901
             elif n1_value != n2_value:
                 if is_complex(n1_value) and is_complex(n2_value):
                     node["children"] = build_ast(n1_value, n2_value)
-                    node["status"] = "equal"
+                    node["status"] = "nested"
                 else:
                     node["status"] = "changed"
                     node["old_value"] = n1_value

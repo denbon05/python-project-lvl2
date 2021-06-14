@@ -10,34 +10,68 @@ def noramlized(value, deep):
         nodes = list(map(
             lambda n: {"key": n[0], "value": n[1]}, value.items()
         ))
-        return get_json_diff(nodes, deep + 1)
+        return get_stylish_diff(nodes, deep + 1)
     return value
+
+
+def _normalized_plain(value):
+    return (
+        "[complex value]" if isinstance(value, dict)
+        else dumps(value).replace('"', "'")
+    )
 
 
 def handle_ast(ast, format):
     foramters = {
-        "stylish": get_json_diff(ast),
+        "stylish": get_stylish_diff(ast),
+        "plain": get_plain_diff(ast),
     }
     return foramters[format]
 
 
-def get_json_diff(ast, deep=0, separater="  "):
+def get_plain_diff(ast, parent_keys=[]):
+    if isinstance(ast, list):
+        return "\n".join(map(
+            lambda n: get_plain_diff(n, parent_keys),
+            filter(lambda n: n.get("status") != "equal", ast),
+        ))
+    status = ast.get("status")
+    if status == "nested":
+        return get_plain_diff(
+            ast.get("children"),
+            [*parent_keys, ast.get("key")],
+        )
+    key = ".".join([*parent_keys, ast.get("key")])
+    value = _normalized_plain(ast.get("value"))
+    old_value = ""
+    if status == "changed":
+        old_value = _normalized_plain(ast.get("old_value"))
+    cases = {
+        "added": f"Property '{key}' was added with value: {value}",
+        "deleted": f"Property '{key}' was removed",
+        "changed": f"Property '{key}' was updated. From {old_value} to {value}",
+    }
+    return cases[status]
+
+
+def get_stylish_diff(ast, deep=0, separater="  "):
     if isinstance(ast, list):
         return "{{{tree}\n{separ}}}".format(
-            tree=''.join(map(lambda n: get_json_diff(n, deep + 1), ast)),
+            tree=''.join(map(lambda n: get_stylish_diff(n, deep + 1), ast)),
             separ=deep * separater,
         )
     tokens = {
         "equal": "  ",
         "added": "+ ",
         "deleted": "- ",
+        "nested": "  ",
     }
 
     full_separater = deep * separater
     status = ast.get("status", "equal")
     children = ast.get("children", [])
     value = (
-        get_json_diff(children, deep + 1) if children
+        get_stylish_diff(children, deep + 1) if children
         else noramlized(ast.get("value"), deep)
     )
 
