@@ -1,4 +1,4 @@
-# Gendiff
+# gendiff
 
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/denbon05/python-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/denbon05/python-project-lvl2/actions)
@@ -26,6 +26,11 @@ pip install git+https://github.com/denbon05/python-project-lvl2.git
 
 ## As a comand line app
 [![asciicast](https://asciinema.org/a/420242.svg)](https://asciinema.org/a/420242)
+[![asciicast](https://asciinema.org/a/420471.svg)](https://asciinema.org/a/420471)
 
-### As a library
+## As a library
 [![asciicast](https://asciinema.org/a/420241.svg)](https://asciinema.org/a/420241)
+
+### Author
+
+<small>Denys Bondarenko denisamigoua@gmail.com</small>
