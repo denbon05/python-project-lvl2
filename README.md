@@ -22,7 +22,10 @@ pip install git+https://github.com/denbon05/python-project-lvl2.git
 <ul>
 <li>stylish (default)</li>
 <li>plain</li>
+<li>json</li>
 </ul>
+
+<small>Used files are in <i>tests/fixtures/</i></small>
 
 ## As a comand line app
 [![asciicast](https://asciinema.org/a/420242.svg)](https://asciinema.org/a/420242)
